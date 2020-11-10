@@ -1,6 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300display=swap');
+
 * {
-  font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.6;
+}
+
+
+h1,
+h2 {
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 10px 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+img {
+  width: 100%;
 }

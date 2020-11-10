@@ -1,5 +1,14 @@
+:root {
+  --primary-color: #2e7d32;
+  --primary-light-color: #60ad5e;
+  --primary-dark-color: #005005;
+  --primary-text-color: #ffffff
+
+}
+
 .navbar {
-  background: #64b174;
+  background: var(--primary-color);
+  color: var(--primary-text-color)
 }
 
 .navbar__container {
@@ -17,7 +26,7 @@
 .navbar__logo {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: var(--primary-text-color);
   cursor: pointer;
 }
 
@@ -28,7 +37,7 @@
 .fa-hamburger,
 .fa-bars,
 .fa-times {
-  color: #fff;
+  color: var(--primary-text-color);
   font-size: 1.5rem;
 }
 
@@ -39,13 +48,13 @@
 }
 
 .navbar__link {
-  color: #fff;
+  color: var(--primary-text-color);
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
 
 .navbar__link:hover {
-  background-color: #4e9359;
+  background-color: var(--primary-dark-color);
   transition: all 0.2s ease-out;
 }
 
@@ -65,7 +74,7 @@
   }
 
   .navbar__menu--active {
-    background: #64b174;
+    background: var(--primary-color);
     width: 100%;
     left: 0%;
     transition: all 0.5s ease-in-out;
@@ -79,7 +88,7 @@
   }
 
   .navbar__link:hover {
-    background-color: #4e9359;
+    background-color: var(--primary-dark-color);
     border-radius: 0;
   }
 

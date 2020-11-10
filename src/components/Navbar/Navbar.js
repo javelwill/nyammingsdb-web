@@ -10,8 +10,8 @@ const Navbar = () => {
   }
 
   return (
-    <header className='navbar'>
-      <nav className='navbar__container'>
+    <div className='navbar'>
+      <div className='navbar__container'>
         <div className='navbar__logo'>
           <h1>NyammingsDB</h1>
           <i className='fas fa-hamburger'></i>
@@ -26,18 +26,34 @@ const Navbar = () => {
             menuActive ? 'navbar__menu navbar__menu--active' : 'navbar__menu'
           }
         >
-          {MenuItems.map((item, index) => {
-            return (
-              <li>
-                <a className={item.class} href={item.url}>
-                  {item.label}
-                </a>
-              </li>
-            )
-          })}
+          <li>
+            <a className='navbar__link' href='#' onClick={toggleMenu}>
+              Home
+            </a>
+          </li>
+          <li>
+            <a className='navbar__link' href='#' onClick={toggleMenu}>
+              Features
+            </a>
+          </li>
+          <li>
+            <a className='navbar__link' href='#' onClick={toggleMenu}>
+              Docs
+            </a>
+          </li>
+          <li>
+            <a className='navbar__link' href='#' onClick={toggleMenu}>
+              Login
+            </a>
+          </li>
+          <li>
+            <a className='navbar__link' href='#' onClick={toggleMenu}>
+              Register
+            </a>
+          </li>
         </ul>
-      </nav>
-    </header>
+      </div>
+    </div>
   )
 }
 
