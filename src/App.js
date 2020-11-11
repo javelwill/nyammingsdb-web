@@ -1,11 +1,13 @@
 import React from 'react'
-import Navbar from './components/Navbar/Navbar'
+import Header from './components/Header/Header'
 import './App.css'
+import Showcase from './components/Showcase/Showcase'
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
+    <div className='App'>
+      <Header />
+      <Showcase />
     </div>
   )
 }
