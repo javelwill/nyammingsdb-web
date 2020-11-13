@@ -1,5 +1,5 @@
 .showcase {
-  height: 500px;
+  height: 450px;
   background-color: var(--primary-color);
   color: #fff;
   position: relative;
@@ -38,10 +38,30 @@
 .showcase::after {
   content: '';
   position: absolute;
-  height: 100px;
-  bottom: -70px;
+  height: 70px;
+  bottom: -40px;
   right: 0;
   left: 0;
   background-color: #fff;
   transform: skewY(-2.5deg);
+}
+
+
+@media screen and (max-width: 900px) {
+  .showcase {
+    height: auto;
+  }
+ .container--showcase {
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ .showcase__section {
+   text-align: center;
+ }
+
+ .showcase__form {
+   top: 0;
+   height: auto;
+   justify-self: center;
+ }
 }

@@ -12,7 +12,7 @@ function Showcase() {
           <p className='showcase__section-text'>
             Access data on food establishments located in Jamaica through an
             easy to use API for free. Build web apps, mobile apps or integrate
-            in to other applications.
+            into other applications.
           </p>
           <a href='#' className='btn btn--outline'>
             START USING THE API
@@ -28,7 +28,7 @@ function Showcase() {
           <h3>Already a user? Log in</h3>
           <form>
             <div className='form-control'>
-              <label htmlFor='username'>USERNAME</label>
+              <label htmlFor='username'>USERNAME OR EMAIL</label>
               <input
                 type='text'
                 name='username'

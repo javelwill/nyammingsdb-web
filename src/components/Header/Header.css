@@ -49,7 +49,7 @@
   display: none;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 900px) {
   .header__menu {
     display: flex;
     flex-direction: column;
