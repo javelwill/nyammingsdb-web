@@ -43,7 +43,7 @@ function Showcase() {
                 required
               />
             </div>
-            <input className='btn' type='submit' value='Login in' />
+            <input className='btn' type='submit' value='Log in' />
           </form>
         </div>
       </div>
