@@ -10,12 +10,12 @@ function Showcase() {
             Jamaica's Food Establishments API
           </h1>
           <p className='showcase__section-text'>
-            Access data on food establishments located in Jamaica through an
+            Access data on food establishments located across Jamaica through an
             easy to use API for free. Build web apps, mobile apps or integrate
             into other applications.
           </p>
           <a href='#' className='btn btn--outline'>
-            START USING THE API
+            LEARN MORE
           </a>
         </div>
         <div className='showcase__form'>

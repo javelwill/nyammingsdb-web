@@ -1,13 +1,13 @@
 import React from 'react'
 import './SubHeader.css'
 
-const SubHeader = () => {
+const SubHeader = ({title, text}) => {
   return (
     <section className='sub-header'>
       <div className='container container--sub-header'>
         <div>
-          <h1 className='sub-header__title'>Docs</h1>
-          <p className='sub-header__text'>Learn how to setup and use the API</p>
+          <h1 className='sub-header__title'>{title}</h1>
+          <p className='sub-header__text'>{text}</p>
         </div>
       </div>
     </section>

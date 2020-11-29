@@ -37,6 +37,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              <Link className='header__menu-link' to='/dashboard' onClick={toggleMenu}>
+                Dashboard
+              </Link>
+            </li>
+            <li>
               <Link className='header__menu-link' to='/login' onClick={toggleMenu}>
                 Login
               </Link>
