@@ -1,11 +1,12 @@
 import React from 'react'
+import SubHeader from '../components/SubHeader/SubHeader'
 
 const Docs = () => {
-    return (
-        <div>
-            <p>Docs</p>
-        </div>
-    )
+  return (
+    <>
+      <SubHeader />
+    </>
+  )
 }
 
 export default Docs

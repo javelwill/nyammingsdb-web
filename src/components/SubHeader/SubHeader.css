@@ -1,0 +1,18 @@
+.sub-header {
+    background-color: var(--primary-color);
+    height: 150px;
+}
+
+.container--sub-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.sub-header__title {
+    color: #fff;
+}
+
+.sub-header__text {
+    color: #fff;
+}
