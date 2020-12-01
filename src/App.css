@@ -49,7 +49,10 @@ hr {
   max-width: 1100px;
   margin: 0 auto;
   overflow: auto;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
   height: 100%;
 }
 
@@ -71,27 +74,129 @@ input[type='submit'] {
   line-height: inherit;
 }
 
-.btn {
-  display: inline-block;
-  padding: 0.5rem 2rem;
-  cursor: pointer;
+
+/* Home */
+
+.showcase {
+  height: 450px;
   background-color: var(--primary-color);
   color: #fff;
-  border: none;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  position: relative;
 }
 
-.btn--outline {
-  background-color: transparent;
-  border: 1px solid #fff;
+.container--showcase {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
 }
 
-.btn-full {
-  width: 100%;
+.showcase__section-title {
+  font-size: 2.5rem;
+}
+
+.showcase__section-text {
+  margin-top: 1.25rem;
+}
+
+.showcase__form {
+  justify-self: flex-end;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 2.5rem;
+  height: 400px;
+  position: relative;
+  top: 50px;
+  z-index: 100;
+}
+
+.showcase::before,
+.showcase::after {
+  content: '';
+  position: absolute;
+  height: 70px;
+  bottom: -40px;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+  transform: skewY(-2.5deg);
+}
+
+@media screen and (max-width: 900px) {
+  .showcase {
+    height: auto;
+  }
+ .container--showcase {
+  grid-template-columns: repeat(1, 1fr);
+ }
+
+ .showcase__section {
+   text-align: center;
+ }
+
+ .showcase__form {
+   top: 0;
+   height: auto;
+   justify-self: center;
+ }
+}
+
+.stats {
+  padding-top: 40px;
+}
+
+.container--stats {
   text-align: center;
 }
 
-.btn:hover {
-  transform: scale(0.98);
+.stats__all {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
 }
+
+.stats__number {
+  font-size: 2rem;
+}
+
+.stats__heading {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.stats__icon {
+  color: var(--primary-dark-color);
+}
+
+@media screen and (max-width: 900px) {
+  .stats {
+    padding-top: 0px;
+  }
+}
+
+/* Dashboard */
+
+.container--dashboard {
+  /* border: solid 1px red;; */
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.application-list {
+ 
+}
+
+/* Dashboard */
+.applications {
+  /* border: solid 1px blue;; */
+
+}
+

@@ -1,10 +1,34 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import SubHeader from '../components/SubHeader/SubHeader'
+import Sidebar from '../components/Sidebar/Sidebar'
+import Applications from './Applications'
+import Account from './Account'
+import Usage from './Usage'
 
 const Dashboard = () => {
   return (
     <>
-      <SubHeader title='Dashboard' text='Manage account, manage applications and view usage.' />
+      <SubHeader
+        title='Dashboard'
+        text='Manage account, manage applications and view usage.'
+      />
+      <Router>
+        <section className="container container--dashboard">
+          <Sidebar />
+          <Switch>
+            <Route path='/dashboard'>
+              <Applications />
+            </Route>
+            <Router path='/account'>
+              <Account />
+            </Router>
+            <Router path='/usage'>
+              <Usage />
+            </Router>
+          </Switch>
+        </section>
+      </Router>
     </>
   )
 }
