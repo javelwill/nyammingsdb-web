@@ -15,13 +15,13 @@ const Home = () => {
               an easy to use API for free. Build web apps, mobile apps or
               integrate into other applications.
             </p>
-            <Button text="LEARN MORE" type="btn btn--outline" link="/"/>
+            <Button text="LEARN MORE" type="btn btn--primary btn--outline" link="/docs"/>
           
           </div>
           <div className='showcase__form'>
             <h3>API Registration</h3>
             <p style={{marginBottom: "0.5rem"}}>Sign up to access our data with a free API key.</p>
-            <Button text="Sign up" type="btn btn--full" link="/"/>
+            <Button text="Sign up" type="btn btn--primary btn--full" link="/register"/>
             <hr />
             <h3>Already a user? Log in</h3>
             <form>
@@ -33,7 +33,7 @@ const Home = () => {
                 <label htmlFor='password'>PASSWORD</label>
                 <input type='password' name='password' required />
               </div>
-              <Button text="Log in" type="btn" link="/"/>
+              <Button text="Log in" type="btn btn--primary" link="/dashboard"/>
             </form>
           </div>
         </div>

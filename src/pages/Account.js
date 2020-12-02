@@ -3,7 +3,7 @@ import account from '../account.js'
 
 const Account = () => {
   return (
-    <div>
+    <section className="container">
       <form action=''>
         <div className=''>
           <label for='email'>Email</label>
@@ -46,7 +46,7 @@ const Account = () => {
           <input type='text' name='website' value={account.website} />
         </div>
       </form>
-    </div>
+    </section>
   )
 }
 

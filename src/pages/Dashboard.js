@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar/Sidebar'
 import Applications from './Applications'
 import Account from './Account'
 import Usage from './Usage'
+import ApplicationDetails from './ApplicationDetails'
 
 const Dashboard = () => {
   return (
@@ -19,6 +20,9 @@ const Dashboard = () => {
           <Switch>
             <Route path='/dashboard'>
               <Applications />
+            </Route>
+            <Route path='/applications/:id'>
+              <ApplicationDetails />
             </Route>
             <Router path='/account'>
               <Account />

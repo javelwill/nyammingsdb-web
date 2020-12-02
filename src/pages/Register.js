@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Register = () => {
-    return (
-        <div>
-            <p>Register</p>
-        </div>
-    )
+  return (
+    <section className='container'>
+      <p>Register</p>
+    </section>
+  )
 }
 
 export default Register

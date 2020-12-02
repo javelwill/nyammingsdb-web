@@ -1,6 +1,14 @@
 .application {
-    border: solid 1px grey;
+    border: solid 1px var(--secondary-gray-color);
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     width: 100%;
+}
+
+.application__actions {
+    display: flex;
+}
+
+.application__action {
+   margin-right: 0.5rem;
 }

@@ -45,6 +45,11 @@
   transition: all 0.2s ease-out;
 }
 
+.header__menu-link--active {
+  background-color: var(--primary-dark-color);
+  transition: all 0.2s ease-out;
+}
+
 .header__menu-icon {
   display: none;
 }

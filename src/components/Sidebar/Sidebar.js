@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './Sidebar.css'
 
 const Sidebar = () => {
@@ -8,19 +8,19 @@ const Sidebar = () => {
     <section className='sidebar'>
         <ul className='sidebar__menu'>
           <li>
-            <Link className='sidebar__menu-link' to='/dashboard'>
+            <NavLink className='sidebar__menu-link' to='/dashboard' activeStyle={{color: 'var(--orange)'}}>
               Applications
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className='sidebar__menu-link' to='/account'>
+            <NavLink className='sidebar__menu-link' to='/account' activeStyle={{color: 'var(--orange)'}}>
               Account
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className='sidebar__menu-link' to='/usage'>
+            <NavLink className='sidebar__menu-link' to='/usage' activeStyle={{color: 'var(--orange)'}}>
               API Usage
-            </Link>
+            </NavLink>
           </li>
         </ul>
     </section>

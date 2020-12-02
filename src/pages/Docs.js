@@ -5,7 +5,7 @@ const Docs = () => {
   return (
     <>
       <SubHeader title='Docs' text='Learn how to setup and use the API.' />
-      <section>
+      <section className='container'>
         <p>Docs</p>
       </section>
     </>
