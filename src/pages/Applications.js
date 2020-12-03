@@ -15,7 +15,7 @@ const Applications = () => {
           />
         ))}
       </div>
-      <Button text='Add Application' type='btn btn--primary' link='/' />
+      <Button text='Add Application' type='btn btn--primary btn--medium' link='/' />
     </section>
   )
 }

@@ -12,3 +12,7 @@
 .application__action {
    margin-right: 0.5rem;
 }
+
+.description-container {
+    min-height: 50px;
+}

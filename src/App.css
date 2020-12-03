@@ -209,6 +209,12 @@ input[type='submit'] {
   /* border: solid 1px blue;; */
 }
 
+/* .application__detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+} */
+
 .application__description {
   font-size: 0.75rem;
 }
@@ -242,5 +248,11 @@ input[type='submit'] {
   color: var(--primary-color)
   /* color: #000 */
   /* color: #E56A0A */
+}
+
+.account__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
 }
 
