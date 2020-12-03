@@ -12,29 +12,50 @@ const ApplicationDetails = () => {
     setShowKey(!showKey)
   }
 
-
   return (
     <div className='application__detail'>
-      <p className='detail__title'>Name</p>
-      <p className='detail__text'>{application.name}</p>
-      <p className='detail__title'>Description</p>
-      <p className='detail__text'>{application.description}</p>
-      <Button text='Update' type='btn btn--primary btn--medium' />
+      <form>
+        <div className='form-control'>
+          <label htmlFor='username'>NAME</label>
+          <input type='text' name='name' required value={application.name} />
+        </div>
+        <div className='form-control' style={{ marginBottom: '0.5rem' }}>
+          <label htmlFor='password'>DESCRIPTION</label>
+          <input
+            type='text'
+            name='description'
+            required
+            value={application.applicationId}
+          />
+        </div>
+        <Button text='Update' type='btn btn--primary btn--medium' />
+      </form>
       <hr />
-      <p className='detail__title'>Application ID</p>
-      <p className='detail__text'>{application.applicationId}</p>
-      <p className='detail__title'>
-        Application Key{' '}
-        <i
-          onClick={toogleShowKey}
-          class={showKey ? 'far fa-eye-slash' : 'far fa-eye'}
-        ></i>
-      </p>
-      <p className='detail__text detail__text--key'>
-        {showKey
-          ? application.applicationKey
-          : application.applicationKey.replace(/./g, '*')}
-      </p>
+
+      <div className='form-control'>
+        <label htmlFor='username'>APPLICATION ID</label>
+        <input
+          type='text'
+          name='applicationId'
+          required
+          value={application.applicationId}
+        />
+      </div>
+      <div className='form-control' style={{ marginBottom: '0.5rem' }}>
+        <label htmlFor='password'>
+          APPLICATION KEY{' '}
+          <i
+            onClick={toogleShowKey}
+            class={showKey ? 'far fa-eye-slash' : 'far fa-eye'}
+          ></i>
+        </label>
+        <input
+          type={showKey ? 'text' : 'password'}
+          name='applicationKey'
+          required
+          value={application.applicationKey}
+        />
+      </div>
       <Button text='Regenerate' type='btn btn--primary btn--medium' />
     </div>
   )

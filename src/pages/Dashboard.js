@@ -12,7 +12,7 @@ const Dashboard = () => {
     <>
       <SubHeader
         title='Dashboard'
-        text='Manage account, manage applications and view usage.'
+        text='Manage applications, manage account and view API usage.'
       />
       <Router>
         <section className="container container--dashboard">
