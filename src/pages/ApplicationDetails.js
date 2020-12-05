@@ -1,47 +1,52 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import applications from '../applications'
-import Button from '../components/Button/Button'
+import useForm from '../useForm'
 
 const ApplicationDetails = () => {
   const [showKey, setShowKey] = useState(false)
-  const [application, setApplication] = useState({})
+  const [applicationBio, setApplicationBio] = useState({})
+  const [applicationCreds, setApplicationCreds] = useState({})
+  const { values, handleChange, handleSubmit } = useForm(applicationBio)
 
+  const history = useHistory()
   const { id } = useParams()
 
   const toogleShowKey = () => {
     setShowKey(!showKey)
   }
 
-  const handleFormChange = (event) => {
-    setApplication((prevApplication) => ({
-      ...prevApplication,
-      [event.target.name]: event.target.value,
-    }))
+  const regenerateKey = () => {
+    console.log('regenerate key')
   }
 
   useEffect(() => {
     const fetchApplication = applications.find((a) => a.applicationId === id)
-    setApplication(fetchApplication)
-  }, [])
+    setApplicationBio({
+      name: fetchApplication.name,
+      description: fetchApplication.description,
+    })
+    setApplicationCreds({
+      applicationId: fetchApplication.applicationId,
+      applicationKey: fetchApplication.applicationKey,
+    })
+  }, [id])
 
   return (
     <section className='application'>
-      <Button
-        text='Go Back'
-        link='/dashboard'
-        type='btn btn--secondary btn--medium'
-      />
+      <button onClick={() => history.goBack()} className='btn btn--secondary btn--medium'>
+        Go Back
+      </button>
       <div className='application__detail'>
         <div className='application__form'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className='form-control'>
               <label htmlFor='username'>NAME</label>
               <input
                 type='text'
                 name='name'
-                value={application.name}
-                onChange={handleFormChange}
+                value={values.name}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -50,12 +55,14 @@ const ApplicationDetails = () => {
               <input
                 type='text'
                 name='description'
-                value={application.description}
-                onChange={handleFormChange}
+                value={values.description}
+                onChange={handleChange}
                 required
               />
             </div>
-            <Button text='Update' type='btn btn--primary btn--medium' />
+            <button type='submit' className='btn btn--primary btn--medium'>
+              Update
+            </button>
           </form>
         </div>
 
@@ -65,7 +72,7 @@ const ApplicationDetails = () => {
             <input
               type='text'
               name='applicationId'
-              value={application.applicationId}
+              value={applicationCreds.applicationId}
               disabled
             />
           </div>
@@ -80,11 +87,16 @@ const ApplicationDetails = () => {
             <input
               type={showKey ? 'text' : 'password'}
               name='applicationKey'
-              value={application.applicationKey}
+              value={applicationCreds.applicationKey}
               disabled
             />
           </div>
-          <Button text='Regenerate' type='btn btn--primary btn--medium' />
+          <button
+            className='btn btn--primary btn--medium'
+            onClick={regenerateKey}
+          >
+            Regenerate
+          </button>
         </div>
       </div>
     </section>

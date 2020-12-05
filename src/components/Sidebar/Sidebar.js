@@ -8,17 +8,17 @@ const Sidebar = () => {
     <section className='sidebar'>
         <ul className='sidebar__menu'>
           <li>
-            <NavLink className='sidebar__menu-link' to='/dashboard' activeStyle={{color: 'var(--orange)'}}>
+            <NavLink className='sidebar__menu-link' to='/dashboard/applications' activeStyle={{color: 'var(--orange)'}}>
               Applications
             </NavLink>
           </li>
           <li>
-            <NavLink className='sidebar__menu-link' to='/account' activeStyle={{color: 'var(--orange)'}}>
+            <NavLink className='sidebar__menu-link' to='/dashboard/account' activeStyle={{color: 'var(--orange)'}}>
               Account
             </NavLink>
           </li>
           <li>
-            <NavLink className='sidebar__menu-link' to='/usage' activeStyle={{color: 'var(--orange)'}}>
+            <NavLink className='sidebar__menu-link' to='/dashboard/usage' activeStyle={{color: 'var(--orange)'}}>
               API Usage
             </NavLink>
           </li>

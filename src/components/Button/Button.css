@@ -4,6 +4,8 @@
   cursor: pointer;
   border: none;
   margin-bottom: 0.5rem;
+  outline:none;
+
 }
 
 .btn--primary {

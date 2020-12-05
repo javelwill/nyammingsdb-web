@@ -1,13 +1,20 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 import SubHeader from '../components/SubHeader/SubHeader'
 import Sidebar from '../components/Sidebar/Sidebar'
 import Applications from './Applications'
 import Account from './Account'
 import Usage from './Usage'
 import ApplicationDetails from './ApplicationDetails'
+import AddApplication from './AddApplication'
 
-const Dashboard = () => {
+const Dashboard = ({match}) => {
+
   return (
     <>
       <SubHeader
@@ -15,19 +22,25 @@ const Dashboard = () => {
         text='Manage applications, manage account and view API usage.'
       />
       <Router>
-        <section className="container container--dashboard">
+        <section className='container container--dashboard'>
           <Sidebar />
           <Switch>
-            <Route path='/dashboard'>
+            <Route exact path='/dashboard'>
+              <Redirect to='/dashboard/applications' />
+            </Route>
+            <Route exact path='/dashboard/applications'>
               <Applications />
             </Route>
-            <Route path='/applications/:id'>
+            <Route path='/dashboard/applications/add'>
+              <AddApplication />
+            </Route>
+            <Route path='/dashboard/applications/view/:id'>
               <ApplicationDetails />
             </Route>
-            <Router path='/account'>
+            <Router path='/dashboard/account'>
               <Account />
             </Router>
-            <Router path='/usage'>
+            <Router path='/dashboard/usage'>
               <Usage />
             </Router>
           </Switch>

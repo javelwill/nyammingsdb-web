@@ -1,7 +1,7 @@
 const account = {
   email: 'javelawilson@gmail.com',
-  firstName: 'javel',
-  lastName: 'wilson',
+  firstName: 'Javel',
+  lastName: 'Wilson',
   address: '1st Street',
   postCode: '876',
   city: 'Kingston',

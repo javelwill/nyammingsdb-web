@@ -1,53 +1,113 @@
-import React from 'react'
-import account from '../account.js'
-import Button from '../components/Button/Button.js'
+import React, { useState, useEffect } from 'react'
+import accountData from '../account.js'
+import useForm from '../useForm'
 
 const Account = () => {
+  const [account, setAccount] = useState({})
+  const { values, handleChange, handleSubmit } = useForm(account)
+
+  useEffect(() => {
+    const fetchAccount = accountData
+    setAccount(fetchAccount)
+  }, [])
+
   return (
-    <section className="account">
-      <form action='' className="account__form">
+    <section className='account'>
+      <form onSubmit={handleSubmit} className='account__form'>
         <div className='form-control'>
-          <label for='email'>Email</label>
-          <input type='text' name='email' value={account.email} />
+          <label htmlFor='email'>Email</label>
+          <input
+            type='text'
+            name='email'
+            value={values.email}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='firstName'>First Name</label>
-          <input type='text' name='firstName' value={account.firstName} />
+          <label htmlFor='firstName'>First Name</label>
+          <input
+            type='text'
+            name='firstName'
+            value={values.firstName}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='lastName'>Last Name</label>
-          <input type='text' name='lastName' value={account.lastName} />
+          <label htmlFor='lastName'>Last Name</label>
+          <input
+            type='text'
+            name='lastName'
+            value={values.lastName}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='address'>Address</label>
-          <input type='text' name='address' value={account.address} />
+          <label htmlFor='address'>Address</label>
+          <input
+            type='text'
+            name='address'
+            value={values.address}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='postCode'>Postcode</label>
-          <input type='text' name='postCode' value={account.postCode} />
+          <label htmlFor='postCode'>Postcode</label>
+          <input
+            type='text'
+            name='postCode'
+            value={values.postCode}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='city'>City</label>
-          <input type='text' name='city' value={account.city} />
+          <label htmlFor='city'>City</label>
+          <input
+            type='text'
+            name='city'
+            value={values.city}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='state'>State</label>
-          <input type='text' name='state' value={account.state} />
+          <label htmlFor='state'>State</label>
+          <input
+            type='text'
+            name='state'
+            value={values.state}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='country'>Country</label>
-          <input type='text' name='country' value={account.country} />
+          <label htmlFor='country'>Country</label>
+          <input
+            type='text'
+            name='country'
+            value={values.country}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='company'>Company</label>
-          <input type='text' name='company' value={account.company} />
+          <label htmlFor='company'>Company</label>
+          <input
+            type='text'
+            name='company'
+            value={values.company}
+            onChange={handleChange}
+          />
         </div>
         <div className='form-control'>
-          <label for='website'>Website</label>
-          <input type='text' name='website' value={account.website} />
+          <label htmlFor='website'>Website</label>
+          <input
+            type='text'
+            name='website'
+            value={values.website}
+            onChange={handleChange}
+          />
         </div>
-        <div style={{marginTop:"0.5rem"}}>
-        <Button text='Update' type='btn btn--primary btn--medium' />
+        <div style={{ marginTop: '0.5rem' }}>
+          <button type='submit' className='btn btn--primary btn--medium'>
+            Update
+          </button>
         </div>
       </form>
     </section>
