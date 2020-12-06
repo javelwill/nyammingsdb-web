@@ -1,13 +1,32 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import mockApplications from '../applications'
 import ApplicationCard from '../components/ApplicationCard/ApplicationCard'
 
+const AUTH_TOKEN =
+  'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
+
+
 const Applications = () => {
-  const history = useHistory()
-  const applicationMax = 4
   const [error, setError] = useState(null)
   const [applications, setApplications] = useState([])
+
+  useEffect(() => {
+    const fetchApplications = async () => {
+      const { data } = await axios.get('/applications', {
+        headers: { Authorization: AUTH_TOKEN },
+        data: {}
+      })
+
+      setApplications(data)
+    }
+
+    fetchApplications()
+  }, [])
+
+  const history = useHistory()
+
+  const applicationMax = 4
 
   const addApplication = () => {
     if (applications.length === applicationMax) {
@@ -16,11 +35,6 @@ const Applications = () => {
     }
     history.push('/dashboard/applications/add')
   }
-
-  useEffect(() => {
-    const fetchApplications = mockApplications
-    setApplications(fetchApplications)
-  }, [])
 
   return (
     <section className='applications'>

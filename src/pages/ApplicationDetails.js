@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom'
-import applications from '../applications'
 import useForm from '../useForm'
+
+const AUTH_TOKEN =
+  'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
 
 const ApplicationDetails = () => {
   const [showKey, setShowKey] = useState(false)
@@ -16,25 +19,42 @@ const ApplicationDetails = () => {
     setShowKey(!showKey)
   }
 
-  const regenerateKey = () => {
+  const regenerateKey = async () => {
     console.log('regenerate key')
+    const { data } = await axios.post('/applications/reset-key', {
+      headers: {
+        Authorization: AUTH_TOKEN,
+        'Content-Type': 'application/json',
+      },
+      data: {
+        'applicationId': id,
+      },
+    })
   }
 
   useEffect(() => {
-    const fetchApplication = applications.find((a) => a.applicationId === id)
-    setApplicationBio({
-      name: fetchApplication.name,
-      description: fetchApplication.description,
-    })
-    setApplicationCreds({
-      applicationId: fetchApplication.applicationId,
-      applicationKey: fetchApplication.applicationKey,
-    })
+    const fetchApplication = async () => {
+      const { data } = await axios.get(`/applications/${id}`, {
+        headers: { Authorization: AUTH_TOKEN },
+        data: {},
+      })
+
+      setApplicationBio({ name: data.name, description: data.description })
+      setApplicationCreds({
+        applicationId: data.applicationId,
+        applicationKey: data.applicationKey,
+      })
+    }
+
+    fetchApplication()
   }, [id])
 
   return (
     <section className='application'>
-      <button onClick={() => history.goBack()} className='btn btn--secondary btn--medium'>
+      <button
+        onClick={() => history.goBack()}
+        className='btn btn--secondary btn--medium'
+      >
         Go Back
       </button>
       <div className='application__detail'>
