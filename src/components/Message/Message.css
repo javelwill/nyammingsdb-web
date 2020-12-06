@@ -1,0 +1,45 @@
+.message {
+    padding: 0.5rem;
+    opacity: 0.9;
+    background: var(--light-message-color);
+    color: #333;
+    font-size: 0.75rem;
+  }
+
+  .message-primary {
+    background: var(--primary-message-color);
+    color: #fff;
+  }
+
+  .message-light {
+    background: var(--light-message-color);
+    color: #333;
+  }
+
+  .message-dark {
+    background: var(--dark-message-color);
+    color: #fff;
+  }
+
+  .message-success {
+    background: var(--success-message-color);
+    color: #fff;
+  }
+
+  .message-danger {
+    background: var(--danger-message-color);
+    color: #fff;
+  }
+
+  .message-white {
+    background: #fff;
+    color: #333;
+    border: #ccc solid 1px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .message {
+      margin-top: 1rem;
+    }
+  }
+  

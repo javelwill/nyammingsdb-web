@@ -1,11 +1,7 @@
 import React from 'react'
 
 const Usage = () => {
-    return (
-        <div>
-            Usage
-        </div>
-    )
+  return <div className='usage'>Usage</div>
 }
 
 export default Usage
