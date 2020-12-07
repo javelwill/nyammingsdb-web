@@ -8,6 +8,9 @@ import Register from './pages/Register'
 import Docs from './pages/Docs'
 import Dashboard from './pages/Dashboard'
 import PrivateRoute from './components/PrivateRoute'
+import RegisterSuccess from './pages/RegisterSuccess';
+import ConfirmEmail from './pages/ConfirmEmail';
+
 
 function App() {
   return (
@@ -21,7 +24,13 @@ function App() {
           <Router path='/login'>
             <Login />
           </Router>
-          <Router path='/register'>
+          <Router path='/register/confirm-email'>
+            <ConfirmEmail />
+          </Router>
+          <Router path='/register/success'>
+            <RegisterSuccess />
+          </Router>
+          <Router exact path='/register'>
             <Register />
           </Router>
           <PrivateRoute path='/dashboard' component={Dashboard} />

@@ -6,6 +6,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_CONFIRM_EMAIL_REQUEST,
+  USER_CONFIRM_EMAIL_SUCCESS,
+  USER_CONFIRM_EMAIL_FAIL,
 } from '../constants/userConstants'
 import axios from 'axios'
 
@@ -44,7 +47,9 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT })
 }
 
-export const register = (firstName, lastName, email, password) => async (dispatch) => {
+export const register = (firstName, lastName, email, password) => async (
+  dispatch
+) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -56,15 +61,42 @@ export const register = (firstName, lastName, email, password) => async (dispatc
       },
     }
 
-    const { data } = await axios.post('/users', { firstName, lastName, email, password }, config)
+    const { data } = await axios.post(
+      '/users',
+      { firstName, lastName, email, password },
+      config
+    )
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data,
     })
-
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const confirmEmail = (token) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_CONFIRM_EMAIL_REQUEST,
+    })
+
+    await axios.get(`/users/email-verification?token=${token}`, {
+      data: {},
+    })
+
+    dispatch({
+      type: USER_CONFIRM_EMAIL_SUCCESS,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_CONFIRM_EMAIL_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

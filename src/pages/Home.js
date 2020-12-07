@@ -53,13 +53,13 @@ const Home = () => {
               Sign up to access our data with a free API key.
             </p>
             <Link className='btn btn--primary btn--full' to='/register'>
-              Sign Up
+              Register
             </Link>
             <hr />
             <h3>Already a user? Log in</h3>
             <form onSubmit={handleSubmit}>
               <div className='form-control'>
-                <label htmlFor='username'>USERNAME OR EMAIL</label>
+                <label htmlFor='username'>EMAIL</label>
                 <input
                   type='text'
                   name='email'
@@ -78,7 +78,7 @@ const Home = () => {
                   required
                 />
               </div>
-              <button className='btn btn--primary' to='/dashboard'>
+              <button className='btn btn--primary'>
                 Log in
               </button>
               {loading && (
