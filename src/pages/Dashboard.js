@@ -1,10 +1,11 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
+  useRouteMatch,
 } from 'react-router-dom'
 import SubHeader from '../components/SubHeader/SubHeader'
 import Sidebar from '../components/Sidebar/Sidebar'
@@ -15,8 +16,9 @@ import ApplicationDetails from './ApplicationDetails'
 import AddApplication from './AddApplication'
 
 const Dashboard = () => {
-  const userLogin = useSelector(state => state.userLogin)
-  const {userInfo} = userLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const match = useRouteMatch()
   return (
     <>
       <SubHeader
@@ -27,23 +29,27 @@ const Dashboard = () => {
         <section className='container container--dashboard'>
           <Sidebar />
           <Switch>
-            <Route exact path='/dashboard'>
-              {userInfo ?  <Redirect to='/dashboard/applications'/> : <Redirect to='/login'/>}
-             
-            </Route>
-            <Route exact path='/dashboard/applications'>
-              <Applications />
-            </Route>
-            <Route path='/dashboard/applications/add'>
-              <AddApplication />
-            </Route>
-            <Route path='/dashboard/applications/view/:id'>
+            <Route path={`${match.url}/applications/view/:id`}>
               <ApplicationDetails />
             </Route>
-            <Router path='/dashboard/account'>
+            <Route path={`${match.url}/applications/add`}>
+              <AddApplication />
+            </Route>
+            <Route exact path={`${match.url}/applications`}>
+              <Applications />
+            </Route>
+            <Route exact path={`${match.path}`}>
+              {userInfo ? (
+                <Redirect to={`${match.url}/applications`} />
+              ) : (
+                <Redirect to='/login' />
+              )}
+            </Route>
+
+            <Router path={`${match.url}/account`}>
               <Account />
             </Router>
-            <Router path='/dashboard/usage'>
+            <Router path={`${match.url}/usage`}>
               <Usage />
             </Router>
           </Switch>

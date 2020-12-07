@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { login } from '../actions/userActions'
-import { Link } from 'react-router-dom'
 import useForm from '../useForm'
-import Loader from '../components/Loader/Loader'
 import Message from '../components/Message/Message'
 
 const INITIAL_STATE = {
@@ -27,7 +25,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log(history)
     if (userInfo) {
       history.push('/dashboard')
     }

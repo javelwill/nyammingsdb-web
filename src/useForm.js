@@ -14,6 +14,7 @@ const useForm = (initialState, submit) => {
       submit()
       setSubmitting(false)
     }
+    // eslint-disable-next-line 
   }, [isSubmitting])
 
   const handleChange = (event) => {

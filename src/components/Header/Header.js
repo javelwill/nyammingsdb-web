@@ -12,7 +12,7 @@ const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false)
 
   const handleLogout = () => {
-    console.log('logout')
+    toggleMenu()
     dispatch(logout())
   }
 
@@ -99,6 +99,7 @@ const Navbar = () => {
                   activeClassName='header__menu-link--active '
                   className='header__menu-link'
                   to='/register'
+                  onClick={toggleMenu}
                 >
                   Register
                 </NavLink>

@@ -314,3 +314,8 @@ input[type='submit'] {
   grid-template-columns: 1fr 1fr;
   column-gap: 0.5rem;
 }
+
+.login__form {
+  width: 400px;
+  margin: 0 auto;
+}
