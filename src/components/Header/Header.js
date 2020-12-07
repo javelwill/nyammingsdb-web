@@ -1,9 +1,20 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../actions/userActions'
 import { NavLink } from 'react-router-dom'
 import './Header.css'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const [menuActive, setMenuActive] = useState(false)
+
+  const handleLogout = () => {
+    console.log('logout')
+    dispatch(logout())
+  }
 
   const toggleMenu = () => {
     setMenuActive(!menuActive)
@@ -47,36 +58,53 @@ const Navbar = () => {
               Docs
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              activeClassName='header__menu-link--active '
-              className='header__menu-link'
-              to='/dashboard'
-              onClick={toggleMenu}
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              activeClassName='header__menu-link--active '
-              className='header__menu-link'
-              to='/login'
-              onClick={toggleMenu}
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              activeClassName='header__menu-link--active '
-              className='header__menu-link'
-              to='/register'
-              onClick={toggleMenu}
-            >
-              Register
-            </NavLink>
-          </li>
+          {userInfo ? (
+            <>
+              <li>
+                <NavLink
+                  activeClassName='header__menu-link--active '
+                  className='header__menu-link'
+                  to='/dashboard'
+                  onClick={toggleMenu}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <a
+                  activeClassName='header__menu-link--active '
+                  className='header__menu-link'
+                  to='/login'
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </a>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  activeClassName='header__menu-link--active '
+                  className='header__menu-link'
+                  to='/login'
+                  onClick={toggleMenu}
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  activeClassName='header__menu-link--active '
+                  className='header__menu-link'
+                  to='/register'
+                >
+                  Register
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </header>

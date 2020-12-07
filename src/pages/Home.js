@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { login } from '../actions/userActions'
 import { Link } from 'react-router-dom'
 import useForm from '../useForm'
+import Loader from '../components/Loader/Loader'
+import Message from '../components/Message/Message'
 
 const INITIAL_STATE = {
   email: '',
@@ -8,7 +13,26 @@ const INITIAL_STATE = {
 }
 
 const Home = () => {
-  const { values, handleChange, handleSubmit } = useForm(INITIAL_STATE)
+  const dispatch = useDispatch()
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
+  const history = useHistory()
+
+  const { values, handleChange, handleSubmit } = useForm(INITIAL_STATE, submit)
+
+  function submit() {
+    const { email, password } = values
+    dispatch(login(email, password))
+  }
+
+  useEffect(() => {
+    console.log(history)
+    if (userInfo) {
+      history.push('/dashboard')
+    }
+  }, [history, userInfo])
+
   return (
     <>
       <section className='showcase'>
@@ -60,6 +84,15 @@ const Home = () => {
               <button className='btn btn--primary' to='/dashboard'>
                 Log in
               </button>
+              {loading && (
+                <div class='fa-1x'>
+                  <i class='fas fa-sync fa-spin'></i>
+                </div>
+              )}
+
+              {error && (
+                <Message type='message message-danger'>{error}</Message>
+              )}
             </form>
           </div>
         </div>

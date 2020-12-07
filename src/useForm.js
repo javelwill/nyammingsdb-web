@@ -1,11 +1,20 @@
 import { useState, useEffect } from 'react'
 
-const useForm = (initialState) => {
+const useForm = (initialState, submit) => {
   const [values, setValues] = useState(initialState)
+  const [isSubmitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     setValues(initialState)
   }, [initialState])
+
+  useEffect(() => {
+    console.log({ values })
+    if (isSubmitting) {
+      submit()
+      setSubmitting(false)
+    }
+  }, [isSubmitting])
 
   const handleChange = (event) => {
     event.persist()
@@ -18,7 +27,7 @@ const useForm = (initialState) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log({ values })
+    setSubmitting(true)
   }
 
   return { values, handleChange, handleSubmit }

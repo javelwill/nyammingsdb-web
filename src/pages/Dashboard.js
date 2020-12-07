@@ -1,4 +1,5 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,8 +14,9 @@ import Usage from './Usage'
 import ApplicationDetails from './ApplicationDetails'
 import AddApplication from './AddApplication'
 
-const Dashboard = ({match}) => {
-
+const Dashboard = () => {
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
   return (
     <>
       <SubHeader
@@ -26,7 +28,8 @@ const Dashboard = ({match}) => {
           <Sidebar />
           <Switch>
             <Route exact path='/dashboard'>
-              <Redirect to='/dashboard/applications' />
+              {userInfo ?  <Redirect to='/dashboard/applications'/> : <Redirect to='/login'/>}
+             
             </Route>
             <Route exact path='/dashboard/applications'>
               <Applications />

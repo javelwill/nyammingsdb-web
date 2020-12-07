@@ -305,6 +305,10 @@ input[type='submit'] {
   /* color: #E56A0A */
 }
 
+.fa-spin, .fa-pulse {
+  color: var(--orange);
+}
+
 .account__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
