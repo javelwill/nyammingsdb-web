@@ -3,9 +3,7 @@ import SubHeader from '../components/SubHeader/SubHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import { confirmEmail } from '../actions/userActions'
-import { userConfirmEmailReducer } from '../reducers/usersReducers'
 import useForm from '../useForm'
-import Message from '../components/Message/Message'
 
 const INITIAL_STATE = {
   email: '',
