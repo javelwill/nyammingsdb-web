@@ -2,25 +2,36 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import useForm from '../useForm'
-import { listApplicationDetails } from '../actions/applicationActions'
+import {
+  listApplicationDetails,
+  updateApplication,
+} from '../actions/applicationActions'
 import Message from '../components/Message/Message'
 import Loader from '../components/Loader/Loader'
 
 const ApplicationDetails = () => {
   const dispatch = useDispatch()
   const applicationDetails = useSelector((state) => state.applicationDetails)
-  const { loading, error, application } = applicationDetails
+  const applicationUpdate = useSelector((state) => state.applicationUpdate)
 
   const history = useHistory()
   const { id } = useParams()
 
   const [showKey, setShowKey] = useState(false)
 
-  const { values, handleChange, handleSubmit } = useForm(application)
+  const { values, handleChange, handleSubmit } = useForm(
+    applicationDetails.application,
+    submit
+  )
+
+  function submit() {
+    const { applicationId, name, description } = values
+    dispatch(updateApplication(applicationId, name, description))
+  }
 
   useEffect(() => {
     dispatch(listApplicationDetails(id))
-  }, [dispatch, id ])
+  }, [dispatch, id])
 
   const toogleShowKey = () => {
     setShowKey(!showKey)
@@ -47,10 +58,12 @@ const ApplicationDetails = () => {
       >
         Go Back
       </button>
-      {loading ? (
+      {applicationDetails.loading ? (
         <Loader />
-      ) : error ? (
-        <Message type="message message-danger">{error}</Message>
+      ) : applicationDetails.error ? (
+        <Message type='message message-danger'>
+          {applicationDetails.error}
+        </Message>
       ) : (
         <div className='application__detail'>
           <div className='application__form'>
@@ -75,9 +88,20 @@ const ApplicationDetails = () => {
                   required
                 />
               </div>
-              <button type='submit' className='btn btn--primary btn--medium'>
-                Update
-              </button>
+              <div style={{ display: 'flex' }}>
+                <button
+                  type='submit'
+                  className='btn btn--primary btn--medium'
+                  disabled={applicationUpdate.loading}
+                >
+                  Update
+                </button>
+                {applicationUpdate.loading && (
+                  <div class='fa-1x' style={{ marginLeft: '0.5rem' }}>
+                    <i class='fas fa-sync fa-spin'></i>
+                  </div>
+                )}
+              </div>
             </form>
           </div>
 
@@ -87,7 +111,7 @@ const ApplicationDetails = () => {
               <input
                 type='text'
                 name='applicationId'
-                value={application.applicationId}
+                value={applicationDetails.application.applicationId}
                 disabled
               />
             </div>
@@ -102,7 +126,7 @@ const ApplicationDetails = () => {
               <input
                 type={showKey ? 'text' : 'password'}
                 name='applicationKey'
-                value={application.applicationKey}
+                value={applicationDetails.application.applicationKey}
                 disabled
               />
             </div>

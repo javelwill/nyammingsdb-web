@@ -5,6 +5,9 @@ import {
   APPLICATION_DETAILS_REQUEST,
   APPLICATION_DETAILS_SUCCESS,
   APPLICATION_DETAILS_FAIL,
+  APPLICATION_UPDATE_REQUEST,
+  APPLICATION_UPDATE_SUCCESS,
+  APPLICATION_UPDATE_FAILURE,
 } from '../constants/applicationConstants'
 
 export const applicationListReducer = (
@@ -33,6 +36,19 @@ export const applicationDetailsReducer = (
     case APPLICATION_DETAILS_SUCCESS:
       return { loading: false, application: action.payload }
     case APPLICATION_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const applicationUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case APPLICATION_UPDATE_REQUEST:
+      return { ...state, loading: true }
+    case APPLICATION_UPDATE_SUCCESS:
+      return { loading: false, application: action.payload }
+    case APPLICATION_UPDATE_FAILURE:
       return { loading: false, error: action.payload }
     default:
       return state

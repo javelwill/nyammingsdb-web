@@ -4,15 +4,22 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   applicationListReducer,
   applicationDetailsReducer,
+  applicationUpdateReducer,
 } from './reducers/applicationReducers'
-import { userLoginReducer, userRegisterReducer, userConfirmEmailReducer } from './reducers/usersReducers'
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userConfirmEmailReducer,
+} from './reducers/usersReducers'
 
 const reducer = combineReducers({
   applicationList: applicationListReducer,
   applicationDetails: applicationDetailsReducer,
+  applicationUpdate: applicationUpdateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userConfirmEmail : userConfirmEmailReducer
+  userConfirmEmail: userConfirmEmailReducer,
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -20,7 +27,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null
 
 const initialState = {
-  userLogin: {userInfo: userInfoFromStorage}
+  userLogin: { userInfo: userInfoFromStorage },
 }
 
 const middleware = [thunk]

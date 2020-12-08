@@ -6,6 +6,9 @@ import {
   APPLICATION_DETAILS_REQUEST,
   APPLICATION_DETAILS_SUCCESS,
   APPLICATION_DETAILS_FAIL,
+  APPLICATION_UPDATE_REQUEST,
+  APPLICATION_UPDATE_SUCCESS,
+  APPLICATION_UPDATE_FAILURE,
 } from '../constants/applicationConstants'
 
 const AUTH_TOKEN =
@@ -37,7 +40,7 @@ export const listApplications = () => async (dispatch) => {
 
 export const listApplicationDetails = (id) => async (dispatch) => {
   try {
-    dispatch({ type: APPLICATION_DETAILS_REQUEST})
+    dispatch({ type: APPLICATION_DETAILS_REQUEST })
 
     const { data } = await axios.get(`/applications/${id}`, {
       headers: { Authorization: AUTH_TOKEN },
@@ -51,6 +54,37 @@ export const listApplicationDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: APPLICATION_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const updateApplication = (id, name, description) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: APPLICATION_UPDATE_REQUEST })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: AUTH_TOKEN,
+      },
+    }
+
+    const { data } = await axios.patch(
+      `/applications/${id}`,
+      { name, description },
+      config
+    )
+
+    dispatch({ type: APPLICATION_UPDATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: APPLICATION_UPDATE_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
