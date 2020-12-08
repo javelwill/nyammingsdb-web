@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import SubHeader from '../components/SubHeader/SubHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
@@ -24,14 +24,12 @@ const Register = () => {
 
   function submit() {
     const { firstName, lastName, email, password } = values
-    dispatch(register(firstName, lastName, email, password))
+    dispatch(
+      register(firstName, lastName, email, password, () =>
+        history.push('/register/success')
+      )
+    )
   }
-
-  useEffect(() => {
-    if (userInfo) {
-      history.push('/register/success')
-    }
-  }, [history, userInfo])
 
   return (
     <>

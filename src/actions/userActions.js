@@ -47,7 +47,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT })
 }
 
-export const register = (firstName, lastName, email, password) => async (
+export const register = (firstName, lastName, email, password, callback) => async (
   dispatch
 ) => {
   try {
@@ -70,6 +70,7 @@ export const register = (firstName, lastName, email, password) => async (
       type: USER_REGISTER_SUCCESS,
       payload: data,
     })
+    callback()
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
