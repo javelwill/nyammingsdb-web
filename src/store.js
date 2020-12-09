@@ -5,6 +5,7 @@ import {
   applicationListReducer,
   applicationDetailsReducer,
   applicationUpdateReducer,
+  applicationResetKeyReducer
 } from './reducers/applicationReducers'
 import {
   userLoginReducer,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   applicationList: applicationListReducer,
   applicationDetails: applicationDetailsReducer,
   applicationUpdate: applicationUpdateReducer,
+  applicationResetKey: applicationResetKeyReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userConfirmEmail: userConfirmEmailReducer,

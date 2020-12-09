@@ -8,7 +8,10 @@ import {
   APPLICATION_DETAILS_FAIL,
   APPLICATION_UPDATE_REQUEST,
   APPLICATION_UPDATE_SUCCESS,
-  APPLICATION_UPDATE_FAILURE,
+  APPLICATION_UPDATE_FAIL,
+  APPLICATION_RESET_KEY_REQUEST,
+  APPLICATION_RESET_KEY_SUCCESS,
+  APPLICATION_RESET_KEY_FAIL,
 } from '../constants/applicationConstants'
 
 const AUTH_TOKEN =
@@ -84,7 +87,42 @@ export const updateApplication = (id, name, description) => async (
     dispatch({ type: APPLICATION_UPDATE_SUCCESS, payload: data })
   } catch (error) {
     dispatch({
-      type: APPLICATION_UPDATE_FAILURE,
+      type: APPLICATION_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const resetApplicationKey = (applicationId) => async (dispatch) => {
+  console.log("action - reset")
+  try {
+    dispatch({
+      type: APPLICATION_RESET_KEY_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: AUTH_TOKEN,
+      },
+    }
+
+    const { data } = await axios.post(
+      '/applications/reset-key',
+      { applicationId },
+      config
+    )
+
+    dispatch({
+      type: APPLICATION_RESET_KEY_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: APPLICATION_RESET_KEY_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

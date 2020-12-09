@@ -5,6 +5,7 @@ import useForm from '../useForm'
 import {
   listApplicationDetails,
   updateApplication,
+  resetApplicationKey,
 } from '../actions/applicationActions'
 import Message from '../components/Message/Message'
 import Loader from '../components/Loader/Loader'
@@ -13,6 +14,7 @@ const ApplicationDetails = () => {
   const dispatch = useDispatch()
   const applicationDetails = useSelector((state) => state.applicationDetails)
   const applicationUpdate = useSelector((state) => state.applicationUpdate)
+  const applicationResetKey = useSelector((state) => state.applicationResetKey)
 
   const history = useHistory()
   const { id } = useParams()
@@ -31,23 +33,15 @@ const ApplicationDetails = () => {
 
   useEffect(() => {
     dispatch(listApplicationDetails(id))
-  }, [dispatch, id])
+  }, [dispatch, id, applicationResetKey.reset])
 
   const toogleShowKey = () => {
     setShowKey(!showKey)
   }
 
-  const regenerateKey = async () => {
-    console.log('regenerate key')
-    // const { data } = await axios.post('/applications/reset-key', {
-    //   headers: {
-    //     Authorization: AUTH_TOKEN,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   data: {
-    //     applicationId: id,
-    //   },
-    // })
+  const regenerateKey = () => {
+    console.log('reset key')
+    dispatch(resetApplicationKey(id))
   }
 
   return (
@@ -130,12 +124,20 @@ const ApplicationDetails = () => {
                 disabled
               />
             </div>
-            <button
-              className='btn btn--primary btn--medium'
-              onClick={regenerateKey}
-            >
-              Regenerate
-            </button>
+            <div style={{ display: 'flex' }}>
+              <button
+                className='btn btn--primary btn--medium'
+                onClick={regenerateKey}
+                disabled={applicationResetKey.loading}
+              >
+                Regenerate
+              </button>
+              {applicationResetKey.loading && (
+                <div class='fa-1x' style={{ marginLeft: '0.5rem' }}>
+                  <i class='fas fa-sync fa-spin'></i>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
