@@ -9,6 +9,9 @@ import {
   USER_CONFIRM_EMAIL_REQUEST,
   USER_CONFIRM_EMAIL_SUCCESS,
   USER_CONFIRM_EMAIL_FAIL,
+  USER_ACCOUNT_REQUEST,
+  USER_ACCOUNT_SUCCESS,
+  USER_ACCOUNT_FAIL,
 } from '../constants/userConstants'
 import axios from 'axios'
 
@@ -47,9 +50,13 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT })
 }
 
-export const register = (firstName, lastName, email, password, callback) => async (
-  dispatch
-) => {
+export const register = (
+  firstName,
+  lastName,
+  email,
+  password,
+  callback
+) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -98,6 +105,40 @@ export const confirmEmail = (token) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_CONFIRM_EMAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const getAccount = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_ACCOUNT_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: userInfo.token,
+      },
+      data: {},
+    }
+
+    const {data} = await axios.get(`/users/${userInfo.userId}`, config)
+
+    dispatch({
+      type: USER_ACCOUNT_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_ACCOUNT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

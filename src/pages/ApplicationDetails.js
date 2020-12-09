@@ -33,7 +33,7 @@ const ApplicationDetails = () => {
 
   useEffect(() => {
     dispatch(listApplicationDetails(id))
-  }, [dispatch, id, applicationResetKey.reset])
+  }, [dispatch])
 
   const toogleShowKey = () => {
     setShowKey(!showKey)

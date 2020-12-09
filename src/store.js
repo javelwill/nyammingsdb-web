@@ -5,12 +5,13 @@ import {
   applicationListReducer,
   applicationDetailsReducer,
   applicationUpdateReducer,
-  applicationResetKeyReducer
+  applicationResetKeyReducer,
 } from './reducers/applicationReducers'
 import {
   userLoginReducer,
   userRegisterReducer,
   userConfirmEmailReducer,
+  userAccountReducer,
 } from './reducers/usersReducers'
 
 const reducer = combineReducers({
@@ -21,7 +22,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userConfirmEmail: userConfirmEmailReducer,
-
+  userAccount: userAccountReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

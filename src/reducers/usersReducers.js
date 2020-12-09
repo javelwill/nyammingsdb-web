@@ -9,6 +9,9 @@ import {
   USER_CONFIRM_EMAIL_REQUEST,
   USER_CONFIRM_EMAIL_SUCCESS,
   USER_CONFIRM_EMAIL_FAIL,
+  USER_ACCOUNT_REQUEST,
+  USER_ACCOUNT_SUCCESS,
+  USER_ACCOUNT_FAIL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -39,7 +42,10 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 }
 
-export const userConfirmEmailReducer = (state = {emailConfirmed: false}, action) => {
+export const userConfirmEmailReducer = (
+  state = { emailConfirmed: false },
+  action
+) => {
   switch (action.type) {
     case USER_CONFIRM_EMAIL_REQUEST:
       return { loading: true, emailConfirmed: false }
@@ -47,6 +53,19 @@ export const userConfirmEmailReducer = (state = {emailConfirmed: false}, action)
       return { loading: false, emailConfirmed: true }
     case USER_CONFIRM_EMAIL_FAIL:
       return { loading: false, emailConfirmed: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userAccountReducer = (state = { account: {} }, action) => {
+  switch (action.type) {
+    case USER_ACCOUNT_REQUEST:
+      return { ...state, loading: true }
+    case USER_ACCOUNT_SUCCESS:
+      return { loading: false, account: action.payload }
+    case USER_ACCOUNT_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }
