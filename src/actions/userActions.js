@@ -166,7 +166,7 @@ export const updateAccount = (account) => async (dispatch, getState) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AUTH_TOKEN,
+        Authorization: userInfo.token,
       },
     }
 

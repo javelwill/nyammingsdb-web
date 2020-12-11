@@ -12,11 +12,12 @@ const Applications = () => {
   const dispatch = useDispatch()
 
   const applicationList = useSelector((state) => state.applicationList)
+  const applicationCreation = useSelector((state) => state.applicationCreation)
   const { loading, error, applications } = applicationList
 
   useEffect(() => {
     dispatch(listApplications())
-  }, [dispatch])
+  }, [applicationCreation.application])
 
   const addApplication = () => {
     if (applications.length === applicationMax) {

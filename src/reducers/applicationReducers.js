@@ -11,6 +11,9 @@ import {
   APPLICATION_RESET_KEY_REQUEST,
   APPLICATION_RESET_KEY_SUCCESS,
   APPLICATION_RESET_KEY_FAIL,
+  APPLICATION_CREATE_REQUEST,
+  APPLICATION_CREATE_SUCCESS,
+  APPLICATION_CREATE_FAIL,
 } from '../constants/applicationConstants'
 
 export const applicationListReducer = (
@@ -58,14 +61,33 @@ export const applicationUpdateReducer = (state = {}, action) => {
   }
 }
 
-export const applicationResetKeyReducer = (state = {reset: false}, action) => {
+export const applicationResetKeyReducer = (
+  state = { reset: false },
+  action
+) => {
   switch (action.type) {
     case APPLICATION_RESET_KEY_REQUEST:
       return { ...state, loading: true, reset: false }
     case APPLICATION_RESET_KEY_SUCCESS:
       return { loading: false, application: action.payload, reset: true }
     case APPLICATION_RESET_KEY_FAIL:
-      return { loading: false,reset: false, error: action.payload }
+      return { loading: false, reset: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const applicationCreateReducer = (
+  state = { application: {} },
+  action
+) => {
+  switch (action.type) {
+    case APPLICATION_CREATE_REQUEST:
+      return { ...state, loading: true, reset: false }
+    case APPLICATION_CREATE_SUCCESS:
+      return { loading: false, application: action.payload }
+    case APPLICATION_CREATE_FAIL:
+      return { loading: false }
     default:
       return state
   }

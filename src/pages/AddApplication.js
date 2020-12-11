@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createApplication } from '../actions/applicationActions'
 import { useHistory } from 'react-router-dom'
 import useForm from '../useForm'
 
@@ -8,12 +10,22 @@ const INITIAL_STATE = {
 }
 
 const AddApplication = () => {
-  const { values, handleChange, handleSubmit } = useForm(INITIAL_STATE)
+  const dispatch = useDispatch()
+  const applicationCreation = useSelector((state) => state.applicationCreation)
+  const { loading, error, application } = applicationCreation
+
   const history = useHistory()
 
+  const { values, handleChange, handleSubmit } = useForm(INITIAL_STATE, submit)
+
+  function submit() {
+    const { name, description } = values
+    dispatch(createApplication(name, description))
+    history.goBack()
+  }
   return (
     <section className='application'>
-      <button onClick={() => history.goBack()} className='btn btn--secondary btn--medium'>
+      <button onClick={submit} className='btn btn--secondary btn--medium'>
         Go Back
       </button>
       <div className='application__detail'>

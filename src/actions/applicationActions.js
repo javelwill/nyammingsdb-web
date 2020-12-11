@@ -12,17 +12,25 @@ import {
   APPLICATION_RESET_KEY_REQUEST,
   APPLICATION_RESET_KEY_SUCCESS,
   APPLICATION_RESET_KEY_FAIL,
+  APPLICATION_CREATE_REQUEST,
+  APPLICATION_CREATE_SUCCESS,
+  APPLICATION_CREATE_FAIL,
 } from '../constants/applicationConstants'
 
 const AUTH_TOKEN =
   'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
 
-export const listApplications = () => async (dispatch) => {
+export const listApplications = () => async (dispatch, getState) => {
   try {
     dispatch({ type: APPLICATION_LIST_REQUEST })
 
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
     const { data } = await axios.get('/applications', {
-      headers: { Authorization: AUTH_TOKEN },
+      headers: { Authorization: userInfo.token },
       data: {},
     })
 
@@ -41,12 +49,17 @@ export const listApplications = () => async (dispatch) => {
   }
 }
 
-export const listApplicationDetails = (id) => async (dispatch) => {
+export const listApplicationDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: APPLICATION_DETAILS_REQUEST })
 
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
     const { data } = await axios.get(`/applications/${id}`, {
-      headers: { Authorization: AUTH_TOKEN },
+      headers: { Authorization: userInfo.token },
       data: {},
     })
 
@@ -66,15 +79,21 @@ export const listApplicationDetails = (id) => async (dispatch) => {
 }
 
 export const updateApplication = (id, name, description) => async (
-  dispatch
+  dispatch, getState
 ) => {
   try {
     dispatch({ type: APPLICATION_UPDATE_REQUEST })
 
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AUTH_TOKEN,
+        Authorization: userInfo.token,
       },
     }
 
@@ -96,17 +115,23 @@ export const updateApplication = (id, name, description) => async (
   }
 }
 
-export const resetApplicationKey = (applicationId) => async (dispatch) => {
-  console.log("action - reset")
+export const resetApplicationKey = (applicationId) => async (dispatch, getState) => {
+  console.log('action - reset')
   try {
     dispatch({
       type: APPLICATION_RESET_KEY_REQUEST,
     })
 
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AUTH_TOKEN,
+        Authorization: userInfo.token,
       },
     }
 
@@ -123,6 +148,43 @@ export const resetApplicationKey = (applicationId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: APPLICATION_RESET_KEY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const createApplication = (name, description) => async (
+  dispatch, getState
+) => {
+  try {
+    dispatch({ type: APPLICATION_CREATE_REQUEST })
+
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: userInfo.token,
+      },
+    }
+
+    const { data } = await axios.post(
+      `/applications`,
+      { name, description },
+      config
+    )
+
+    dispatch({ type: APPLICATION_CREATE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: APPLICATION_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -15,6 +15,9 @@ import {
   UPDATE_ACCOUNT_REQUEST,
   UPDATE_ACCOUNT_SUCCESS,
   UPDATE_ACCOUNT_FAIL,
+  APPLICATION_CREATE_REQUEST,
+  APPLICATION_CREATE_SUCCESS,
+  APPLICATION_CREATE_FAIL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
