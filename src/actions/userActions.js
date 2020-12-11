@@ -12,8 +12,14 @@ import {
   USER_ACCOUNT_REQUEST,
   USER_ACCOUNT_SUCCESS,
   USER_ACCOUNT_FAIL,
+  UPDATE_ACCOUNT_REQUEST,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAIL,
 } from '../constants/userConstants'
 import axios from 'axios'
+
+const AUTH_TOKEN =
+  'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -130,11 +136,11 @@ export const getAccount = () => async (dispatch, getState) => {
       data: {},
     }
 
-    const {data} = await axios.get(`/users/${userInfo.userId}`, config)
+    const { data } = await axios.get(`/users/${userInfo.userId}`, config)
 
     dispatch({
       type: USER_ACCOUNT_SUCCESS,
-      payload: data
+      payload: data,
     })
   } catch (error) {
     dispatch({
@@ -142,6 +148,44 @@ export const getAccount = () => async (dispatch, getState) => {
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const updateAccount = (account) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: UPDATE_ACCOUNT_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: AUTH_TOKEN,
+      },
+    }
+
+    const { data } = await axios.patch(
+      `/users/${userInfo.userId}`,
+      { ...account },
+      config
+    )
+
+    dispatch({
+      type: UPDATE_ACCOUNT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: UPDATE_ACCOUNT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data
           : error.message,
     })
   }

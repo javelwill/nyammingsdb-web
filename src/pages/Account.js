@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import useForm from '../useForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAccount } from '../actions/userActions'
-import moduleName from '../components/Loader/Loader'
+import { getAccount, updateAccount } from '../actions/userActions'
 import Loader from '../components/Loader/Loader'
 
 const Account = () => {
   const dispatch = useDispatch()
   const userAccount = useSelector((state) => state.userAccount)
+  const userAccountUpdate = useSelector((state) => state.updateAccount)
 
   const { values, handleChange, handleSubmit } = useForm(
     userAccount.account,
@@ -15,8 +15,7 @@ const Account = () => {
   )
 
   function submit() {
-    const { applicationId, firstName, lastName, email } = values
-    // dispatch(updateApplication(applicationId, name, description))
+    dispatch(updateAccount(values))
   }
 
   useEffect(() => {
@@ -119,10 +118,15 @@ const Account = () => {
               onChange={handleChange}
             />
           </div>
-          <div style={{ marginTop: '0.5rem' }}>
+          <div style={{ marginTop: '0.5rem', display: 'flex' }}>
             <button type='submit' className='btn btn--primary btn--medium'>
               Update
             </button>
+            {userAccountUpdate.loading && (
+              <div class='fa-1x' style={{ marginLeft: '0.5rem' }}>
+                <i class='fas fa-sync fa-spin'></i>
+              </div>
+            )}
           </div>
         </form>
       )}
