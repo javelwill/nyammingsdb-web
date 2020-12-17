@@ -17,8 +17,8 @@ import {
   APPLICATION_CREATE_FAIL,
 } from '../constants/applicationConstants'
 
-const AUTH_TOKEN =
-  'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
+import {toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const listApplications = () => async (dispatch, getState) => {
   try {
@@ -102,8 +102,19 @@ export const updateApplication = (id, name, description) => async (
       { name, description },
       config
     )
-
+    
     dispatch({ type: APPLICATION_UPDATE_SUCCESS, payload: data })
+
+    toast.success("Your application was successfully updated!", {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   } catch (error) {
     dispatch({
       type: APPLICATION_UPDATE_FAIL,
@@ -111,6 +122,16 @@ export const updateApplication = (id, name, description) => async (
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    })
+
+    toast.error("Your application update failed!", {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     })
   }
 }
@@ -144,6 +165,16 @@ export const resetApplicationKey = (applicationId) => async (dispatch, getState)
     dispatch({
       type: APPLICATION_RESET_KEY_SUCCESS,
       payload: data,
+    })
+
+    toast.success("Your application key was successfully regenerated!", {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     })
   } catch (error) {
     dispatch({

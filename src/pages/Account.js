@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAccount, updateAccount } from '../actions/userActions'
 import Loader from '../components/Loader/Loader'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const Account = () => {
   const dispatch = useDispatch()
   const userAccount = useSelector((state) => state.userAccount)
@@ -24,6 +27,8 @@ const Account = () => {
 
   return (
     <section className='account'>
+      <ToastContainer />
+
       {userAccount.loading ? (
         <Loader />
       ) : (

@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom'
 import ApplicationCard from '../components/ApplicationCard/ApplicationCard'
 import Loader from '../components/Loader/Loader'
 import Message from '../components/Message/Message'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Applications = () => {
   const applicationMax = 4
@@ -21,6 +23,15 @@ const Applications = () => {
 
   const addApplication = () => {
     if (applications.length === applicationMax) {
+      toast.error('You have reached your maximimum number of applications', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true, 
+        draggable: true,
+        progress: undefined,
+      })
       return
     }
     history.push('/dashboard/applications/add')
@@ -31,11 +42,10 @@ const Applications = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message type="message message-danger">
-          {error}
-        </Message>
+        <Message type='message message-danger'>{error}</Message>
       ) : (
         <>
+          <ToastContainer />
           <div className='application-list'>
             {applications?.map((application) => (
               <ApplicationCard

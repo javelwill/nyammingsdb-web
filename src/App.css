@@ -14,12 +14,26 @@
   --secondary-gray-color: #e1e2e1;
 
   --orange: #e56a0a;
+
+  --red: #c62828;
+  --red-light: #ff5f52;
+  --red-dark: #8e0000;
   
   --primary-message-color: #dc3545;
   --dark-message-color: #333333;
   --light-message-color: #f4f4f4;
   --danger-message-color: #dc3545;
   --success-message-color: #28a745;
+}
+
+.Toastify__toast--success {
+  color: white !important;
+  background-color: var(--primary-color) !important;
+}
+
+.Toastify__toast--error {
+  color: white !important;
+  background-color: var(--red) !important ;
 }
 
 * {

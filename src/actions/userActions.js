@@ -18,8 +18,9 @@ import {
 } from '../constants/userConstants'
 import axios from 'axios'
 
-const AUTH_TOKEN =
-  'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGQzeWF3ZEBnbWFpbC5jb20iLCJleHAiOjE2MDgwNzUxMDl9.HYZMCHo0wme3ioeZjvyDzUmk2PkbUZEa_QlgX8tP-Mdo1uD_-V-5SFtu60K0BA82PiEephgDTHTTVjeBA1FlPg'
+import {toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -180,6 +181,17 @@ export const updateAccount = (account) => async (dispatch, getState) => {
       type: UPDATE_ACCOUNT_SUCCESS,
       payload: data,
     })
+    
+    toast.success("Your account was successfully updated!", {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   } catch (error) {
     dispatch({
       type: UPDATE_ACCOUNT_FAIL,
@@ -187,6 +199,16 @@ export const updateAccount = (account) => async (dispatch, getState) => {
         error.response && error.response.data.message
           ? error.response.data
           : error.message,
+    })
+
+    toast.error("Your account update failed!", {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     })
   }
 }

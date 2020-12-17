@@ -74,7 +74,7 @@ const Navbar = () => {
                 <a
                   activeClassName='header__menu-link--active '
                   className='header__menu-link'
-                  to='/login'
+                  href='/login'
                   style={{ cursor: 'pointer' }}
                   onClick={handleLogout}
                 >

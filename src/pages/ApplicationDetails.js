@@ -9,6 +9,8 @@ import {
 } from '../actions/applicationActions'
 import Message from '../components/Message/Message'
 import Loader from '../components/Loader/Loader'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ApplicationDetails = () => {
   const dispatch = useDispatch()
@@ -46,6 +48,8 @@ const ApplicationDetails = () => {
 
   return (
     <section className='application'>
+      <ToastContainer />
+
       <button
         onClick={() => history.goBack()}
         className='btn btn--secondary btn--medium'
